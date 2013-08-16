@@ -7,6 +7,8 @@
 //
 
 #import "MKADArticlesTableViewController.h"
+#import "MKADArticle.h"
+#import "MKADArticleViewController.h"
 
 @interface MKADArticlesTableViewController ()
 
@@ -26,12 +28,61 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    
+    [self refresh];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(void)refresh
+{
+    NSURL *url = [NSURL URLWithString:self.articlesURLString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection connectionWithRequest:request delegate:self];
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    self.responseData = [[NSMutableData alloc] init];
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    [self.refreshControl endRefreshing];
+    
+    NSError *error = nil;
+    NSArray *jsonRecievedArray = [NSJSONSerialization JSONObjectWithData:self.responseData options:0 error:&error];
+    if(error)
+    {
+        NSLog(@"Error parsing JSON: %@", [error localizedDescription]);
+    }
+    else
+    {
+        NSMutableArray *articlesMutableArray = [NSMutableArray array];
+        for (NSDictionary *jsonObject in jsonRecievedArray)
+        {
+            MKADArticle *article = [[MKADArticle alloc] init];
+            article.numericID = jsonObject[@"id"];
+            article.title = jsonObject[@"title"];
+            article.body = jsonObject[@"body"];
+            article.publishedDate = jsonObject[@"published"];
+            article.urlPath = jsonObject[@"url"];
+            
+            [articlesMutableArray addObject:article];
+        }
+        
+        self.articles = [articlesMutableArray copy];
+        [self.tableView reloadData];
+    }
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [self.refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +100,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return [self.articles count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,10 +108,15 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%d", [indexPath row]];
+    MKADArticle *article = [self.articles objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = article.title;
+    cell.detailTextLabel.text = article.body;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 
@@ -107,9 +163,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    MKADArticle *article = [self.articles objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = @"Selected!";
+    MKADArticleViewController *articleViewController = [[MKADArticleViewController alloc] init];
+    articleViewController.article = article;
+    [self.navigationController pushViewController:articleViewController animated:YES];
 }
+
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%d", [indexPath row]];
+//}
+
 
 @end

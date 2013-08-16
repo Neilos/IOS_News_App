@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const MakersNewsURLKey;
+
 @interface MKADViewController : UIViewController
 {
 //    int instance;
@@ -15,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
 - (IBAction)getNews:(id)sender;
+- (IBAction)showMessage:(id)sender;
 
 @end
