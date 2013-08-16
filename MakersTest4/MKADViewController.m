@@ -7,6 +7,7 @@
 //
 
 #import "MKADViewController.h"
+#import "MKADArticlesTableViewController.h"
 
 @interface MKADViewController ()
 
@@ -26,4 +27,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)getNews:(id)sender {
+    MKADArticlesTableViewController *articlesTableViewController = [[MKADArticlesTableViewController alloc] initWithStyle:UITableViewStylePlain];
+
+    [self.navigationController pushViewController:articlesTableViewController animated:YES];
+}
 @end

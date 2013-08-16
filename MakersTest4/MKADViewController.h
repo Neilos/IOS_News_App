@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface MKADViewController : UIViewController
+{
+//    int instance;
+}
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
+- (IBAction)getNews:(id)sender;
 
 @end
