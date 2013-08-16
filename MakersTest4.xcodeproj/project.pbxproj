@@ -18,6 +18,8 @@
 		5174659217BE3873003E2AE1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5174659117BE3873003E2AE1 /* Default-568h@2x.png */; };
 		5174659517BE3873003E2AE1 /* MKADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5174659417BE3873003E2AE1 /* MKADViewController.m */; };
 		5174659817BE3873003E2AE1 /* MKADViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5174659617BE3873003E2AE1 /* MKADViewController.xib */; };
+		517465A417BE44B7003E2AE1 /* MKADArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517465A217BE44B7003E2AE1 /* MKADArticlesTableViewController.m */; };
+		517465A517BE44B7003E2AE1 /* MKADArticlesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517465A317BE44B7003E2AE1 /* MKADArticlesTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,9 @@
 		5174659317BE3873003E2AE1 /* MKADViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKADViewController.h; sourceTree = "<group>"; };
 		5174659417BE3873003E2AE1 /* MKADViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKADViewController.m; sourceTree = "<group>"; };
 		5174659717BE3873003E2AE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MKADViewController.xib; sourceTree = "<group>"; };
+		517465A117BE44B7003E2AE1 /* MKADArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKADArticlesTableViewController.h; path = ../MKADArticlesTableViewController.h; sourceTree = "<group>"; };
+		517465A217BE44B7003E2AE1 /* MKADArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKADArticlesTableViewController.m; path = ../MKADArticlesTableViewController.m; sourceTree = "<group>"; };
+		517465A317BE44B7003E2AE1 /* MKADArticlesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MKADArticlesTableViewController.xib; path = ../MKADArticlesTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +90,9 @@
 			children = (
 				5174658A17BE3873003E2AE1 /* MKADAppDelegate.h */,
 				5174658B17BE3873003E2AE1 /* MKADAppDelegate.m */,
+				517465A117BE44B7003E2AE1 /* MKADArticlesTableViewController.h */,
+				517465A217BE44B7003E2AE1 /* MKADArticlesTableViewController.m */,
+				517465A317BE44B7003E2AE1 /* MKADArticlesTableViewController.xib */,
 				5174659317BE3873003E2AE1 /* MKADViewController.h */,
 				5174659417BE3873003E2AE1 /* MKADViewController.m */,
 				5174659617BE3873003E2AE1 /* MKADViewController.xib */,
@@ -164,6 +172,7 @@
 				5174659017BE3873003E2AE1 /* Default@2x.png in Resources */,
 				5174659217BE3873003E2AE1 /* Default-568h@2x.png in Resources */,
 				5174659817BE3873003E2AE1 /* MKADViewController.xib in Resources */,
+				517465A517BE44B7003E2AE1 /* MKADArticlesTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +186,7 @@
 				5174658817BE3873003E2AE1 /* main.m in Sources */,
 				5174658C17BE3873003E2AE1 /* MKADAppDelegate.m in Sources */,
 				5174659517BE3873003E2AE1 /* MKADViewController.m in Sources */,
+				517465A417BE44B7003E2AE1 /* MKADArticlesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
